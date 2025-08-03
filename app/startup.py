@@ -1,11 +1,15 @@
 from app.database import create_tables
-from nicegui import ui
+import app.navigation
+import app.xray_detection
+import app.history
 
 
 def startup() -> None:
-    # this function is called before the first request
+    """Initialize the application."""
+    # Create database tables
     create_tables()
 
-    @ui.page("/")
-    def index():
-        ui.label("🚧 Work in progress 🚧").style("font-size: 2rem; text-align: center; margin-top: 2rem")
+    # Register all UI modules
+    app.navigation.create()
+    app.xray_detection.create()
+    app.history.create()
